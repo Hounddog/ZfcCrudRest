@@ -5,7 +5,6 @@ namespace ZfcCrudJsonRest\Module;
 use ZfcBase\Module\AbstractModule as ZfcBaseAbstractModule;
 
 use Zend\ModuleManager\Feature;
-use Zend\EventManager\EventInterface;
 use Zend\Mvc\MvcEvent;
 
 
