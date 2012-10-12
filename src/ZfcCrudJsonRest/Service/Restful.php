@@ -18,31 +18,6 @@ class Restful implements ServiceManagerAwareInterface
     public function __construct(DBMapper $mapper) {
         $this->mapper = $mapper;
     }
-    /*public function getAll($start = 0, $count = 100, $orderBy = array()) {
-        $qb = $this->getQueryBuilder($start, $count);
-        if(count($orderby)) {
-            $qb->addOrderBy('entity._' . $orderBy['sort'], $orderBy['order']);
-        }
-
-        $query = $qb->getQuery();
-        $results = $query->getResults();
-        $this->setCount(count($results));
-        return $results;
-    }*/
-
-    /*public function getById($id)
-    {
-        $em = $this->sm->get('doctrine.entitymanager.orm_default');
-
-        $entity = $em->find($this->entityName, $id);
-        if (!$model) {
-            throw new Exception\NotFound(
-                $this->entityName . ' ' . $id . ' not found'
-            );
-        }
-
-        return $entity;
-    }*/
 
     public function create(array $data) 
     {   
