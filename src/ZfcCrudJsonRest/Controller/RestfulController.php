@@ -7,7 +7,7 @@ use Zend\View\Model\JsonModel;
 use RestCrudDoctrineModule\Mapper\AbstractDBMapper as DBMapper;
 use RestCrudDoctrineModule\Service\AbstractRestService as Service;
 
-abstract class AbstractRestfulController extends ZendAbstractRestfulController
+class RestfulController extends ZendAbstractRestfulController
 {
     protected $service;
 
@@ -34,7 +34,6 @@ abstract class AbstractRestfulController extends ZendAbstractRestfulController
         $entity = $this->getMapper->insert($entity);
         $data = $this->getMapper()->entityToArray($entity);
 
-        // todo convert to array for jsonmodel
         return new JsonModel($data);
         // 
         /*$this->getResponse()->setHeader(
