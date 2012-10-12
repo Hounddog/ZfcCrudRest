@@ -1,11 +1,11 @@
 <?php
 
-namespace RestCrudDoctrineModule\Controller;
+namespace ZfcCrudJsonRest\Controller;
 
 use Zend\Mvc\Controller\AbstractRestfulController as ZendAbstractRestfulController;
 use Zend\View\Model\JsonModel;
-use RestCrudDoctrineModule\Mapper\AbstractDBMapper as DBMapper;
-use RestCrudDoctrineModule\Service\AbstractRestService as Service;
+use ZfcCrud\Mapper\AbstractDBMapper as DBMapper;
+use ZfcCrud\Service\AbstractRestService as Service;
 
 class RestfulController extends ZendAbstractRestfulController
 {
