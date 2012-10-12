@@ -23,7 +23,7 @@ abstract class AbstractRestfulController extends ZendAbstractRestfulController
 
     public function get($id)
     {
-        $entity = $this->getMapper()->findById($id);  );
+        $entity = $this->getMapper()->findById($id);
         $data = $this->getMapper()->entityToArray($entity);
         return new JsonModel($data);
     }
