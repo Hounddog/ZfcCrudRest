@@ -18,14 +18,14 @@ class RestfulController extends ZendAbstractRestfulController
         $data = $this->getMapper()->findAll(
             new \Zend\Stdlib\Hydrator\ClassMethods
         );
-        return new JsonModel($data);
+        return $data;
     }
 
     public function get($id)
     {
         $entity = $this->getMapper()->findById($id);
         $data = $this->getMapper()->entityToArray($entity);
-        return new JsonModel($data);
+        return $data;
     }
 
     public function create($data)
@@ -34,7 +34,7 @@ class RestfulController extends ZendAbstractRestfulController
         $entity = $this->getMapper->insert($entity);
         $data = $this->getMapper()->entityToArray($entity);
 
-        return new JsonModel($data);
+        return $data;
         // 
         /*$this->getResponse()->setHeader(
             'Location',
@@ -51,7 +51,7 @@ class RestfulController extends ZendAbstractRestfulController
         $entity = $this->service->update($id, $data);
         $entity = $this->getMapper->update($entity);
         $data = $this->getMapper()->entityToArray($entity);
-        return new JsonModel($data);
+        return $data;
     }
 
 
