@@ -1,6 +1,6 @@
 <?php
 
-namespace ZfcCrudJsonRest\Service;
+namespace ZfcCrudRest\Service;
 
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;

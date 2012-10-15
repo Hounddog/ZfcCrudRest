@@ -1,6 +1,6 @@
 <?php
 
-namespace ZfcCrudJsonRest\Controller;
+namespace ZfcCrudRest\Controller;
 
 use Zend\Mvc\Controller\AbstractRestfulController as ZendAbstractRestfulController;
 use Zend\View\Model\JsonModel;

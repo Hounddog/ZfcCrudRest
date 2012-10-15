@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZfcCrudJsonRest;
+namespace ZfcCrudRest;
 
 use ZfcBase\Module\AbstractModule;
 

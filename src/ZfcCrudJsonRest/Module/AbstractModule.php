@@ -1,6 +1,6 @@
 <?php
 
-namespace ZfcCrudJsonRest\Module;
+namespace ZfcCrudRest\Module;
 
 use ZfcBase\Module\AbstractModule as ZfcBaseAbstractModule;
 
