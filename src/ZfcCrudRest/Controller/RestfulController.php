@@ -4,8 +4,8 @@ namespace ZfcCrudRest\Controller;
 
 use Zend\Mvc\Controller\AbstractRestfulController as ZendAbstractRestfulController;
 use Zend\View\Model\JsonModel;
-use ZfcCrud\Mapper\AbstractDBMapper as DBMapper;
-use ZfcCrud\Service\AbstractRestService as Service;
+use ZfcCrud\Mapper\DbMapperInterface as DBMapper;
+use ZfcCrudRest\Service\RestFul as RestService;
 
 class RestfulController extends ZendAbstractRestfulController
 {
@@ -16,57 +16,47 @@ class RestfulController extends ZendAbstractRestfulController
     public function getList()
     {
         $data = $this->getMapper()->findAll(
-            new \Zend\Stdlib\Hydrator\ClassMethods
+            null, new \Zend\Stdlib\Hydrator\ClassMethods
         );
-        return $data;
+
+        return new JsonModel($data);
     }
 
     public function get($id)
     {
-        $entity = $this->getMapper()->findById($id);
-        $data = $this->getMapper()->entityToArray($entity);
-        return $data;
+        $entity = $this->getMapper()->findById($id, new \Zend\Stdlib\Hydrator\ClassMethods);
+
+        return new JsonModel($entity);
     }
 
     public function create($data)
     {
         $entity = $this->service->create($data);
-        $entity = $this->getMapper->insert($entity);
-        $data = $this->getMapper()->entityToArray($entity);
+        $entity = $this->getMapper()->create($entity);
+        $id = $entity->getId();
 
-        return $data;
-        // 
-        /*$this->getResponse()->setHeader(
-            'Location',
-            '/' . lcfirst($this->_packageName) . $this->entityName . '/'
-            . $dto->id,
-            true
-        );*/
-        //$this->getResponse()->setHttpResponseCode(
-        //return array('data' => 'create');
+        $entity = $this->getMapper()->findById($id, new \Zend\Stdlib\Hydrator\ClassMethods);
+
+        return new JsonModel($entity);
     }
 
     public function update($id, $data)
     {
         $entity = $this->service->update($id, $data);
-        $entity = $this->getMapper->update($entity);
-        $data = $this->getMapper()->entityToArray($entity);
-        return $data;
+        $entity = $this->getMapper()->update($entity);
+        $entity = $this->getMapper()->findById($id, new \Zend\Stdlib\Hydrator\ClassMethods);
+        return new JsonModel($entity);
     }
 
 
     public function delete($id)
     {
-        $entity = $this->getMapper->findById($id);
-        $this->getMapper->remove($entity);
-        
-        echo 'deleted';
-        exit;
-        $this->getResponse()->setHttpResponseCode(204);
-        //return array('data' => 'delete');
+        $entity = $this->getMapper()->findById($id);
+        $this->getMapper()->delete($entity);
+        return new JsonModel(array('deleted'));
     }
 
-    public function setService(Service $service)
+    public function setService(RestService $service)
     {
         $this->service = $service;
     }
@@ -76,14 +66,14 @@ class RestfulController extends ZendAbstractRestfulController
         return $this->service;
     }
 
-    public function setMapper(DBMapper $mapper) 
+    public function setMapper(DbMapper $mapper)
     {
-        $this->mapper();
+        $this->mapper = $mapper;
     }
 
     public function getMapper()
     {
-        if (!$this->mapper instanceof DBMapper) {
+        if (!$this->mapper) {
             $this->mapper = $this->sm->get('crud_db_mapper');
         }
         return $this->mapper;
